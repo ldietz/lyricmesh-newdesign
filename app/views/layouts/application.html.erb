@@ -5,29 +5,35 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Lyric Mesh Lyrics (lyricmesh) </title>
-  <%= stylesheet_link_tag 'scaffold', 'lyric' %>
+  <link rel="stylesheet" href="/stylesheets/blueprint/screen.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/stylesheets/blueprint/print.css" type="text/css" media="print" />
+  <!--[if lt IE 8]>
+  <link rel="stylesheet" href="/stylesheets/blueprint/ie.css" type="text/css" media="screen, projection" />
+  <![endif]-->
 </head>
 <body>
-  <div id="banner">
+  <div class="container">
+  <div id="top" class="span-24">
+  <div id="banner" class="span-24 prepend-3 last">
     <%= yield :banner %>
-    <%= image_tag("logobackdrop.png")  %>
+    <%= image_tag("logo.gif", :size=>"250x80" )  %>
   </div>
   <div id="bannerbottom">
     <p>
-      <div id="bannermiddle">
+      <div id="bannermiddle" class="span-24 prepend-10">
         <a href="../">Home</a> &nbsp;
         <%= link_to 'Genres', genre_path %> <br />
       </p>
       </div>
-    <div id="artist">
+    <div id="artist" class="span-24 prepend-8">
       <% for a in 'a'..'z' %>
         <a href="../content/artists?artist=<%= a %>"><%= a.upcase %> </a>
       <% end %><br /><br />
     </div>
-    <div id="bannerleftside">      
+    <div id="bannerleftside" class="prepend-2 span-10">      
       Search by song or artist or browse by artist:
     </div>
-    <div id="bannerside">
+    <div id="bannerside" class="span-12 last">
       <% form_tag '/search/results', :multipart => true, :method => 'get' do %>
       <%= text_field_tag :q %>
       <%= submit_tag "Search", :name => nil %><br />
@@ -38,17 +44,21 @@
       <% end %>
     </div>
   </div>
-  <div id="columns">
-    <div id="adright">
+  </div>
+  <div id="columns" class="span-24">
+    <div id="adright" class="prepend-20 span-4">
       <%= yield :adright %>
     </div>
-    <div id="adleft">
+    <div id="adleft" class="span-3">
       <% render :partial => 'layouts/adcode', :locals => {:post => @post} %>
     </div>
-    <div id="main">
+    <div id="main" class="prepend-3 span-18">
       <%= yield %>
-    <%= render :partial => 'layouts/bottombackground', :locals => {:post => @post} %>
     </div>
+    <div id="bottom" class="span-24">
+      <%= render :partial => 'layouts/bottombackground', :locals => {:post => @post} %>
+    </div>
+  </div>
   </div>
 </body>
 </html>
